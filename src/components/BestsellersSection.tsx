@@ -87,7 +87,7 @@ export const BestsellersSection = ({ featuredCoursesData }: BestsellersSectionPr
               Top Rated
             </Badge>
             
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+            <h2 className="text-4xl md:text-5xl font-serif font-light leading-tight text-[#011425]">
               Bestsellers Chosen by Our Students
             </h2>
             

@@ -33,7 +33,7 @@ export const ExpertAITeachers = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-6 md:mb-12">
           <Badge className="mb-4">AI-Powered Teaching</Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-serif font-light mb-4 text-[#011425]">
             Our Expert <span className="text-primary">AI Teachers</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

@@ -54,7 +54,7 @@ export const MostPopularSection = ({ featuredCoursesData }: MostPopularSectionPr
             <Flame className="w-3 h-3 mr-1" />
             Trending Now
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-serif font-light mb-4 text-[#011425]">
             Most <span className="text-primary">Popular</span> Courses
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

@@ -122,7 +122,9 @@ export const ExploreProgramsSection = ({ categoriesData, coursesData }: ExploreP
   return (
     <section id="explore-programs" className="py-16 bg-muted/30 scroll-mt-24">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-8">Explore Our Top Programs</h2>
+        <h2 className="mb-8 font-serif text-4xl font-light tracking-tight text-[#011425]">
+          Explore Our Top Programs
+        </h2>
 
         {/* Error state */}
         {hasError && (

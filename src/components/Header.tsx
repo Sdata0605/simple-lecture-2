@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, Search, ChevronDown, Bell, User, LogOut, LayoutDashboard, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +25,8 @@ export const Header = ({ minimal = false }: { minimal?: boolean } = {}) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   // Use centralized auth context instead of duplicate listeners
   const { user } = useAuth();
@@ -79,7 +81,13 @@ export const Header = ({ minimal = false }: { minimal?: boolean } = {}) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background shadow-sm">
+    <header
+      className={
+        isHome
+          ? "sticky top-0 z-50 w-full border-b border-white/10 bg-[#011425]/75 text-white backdrop-blur-md [&_button]:text-white [&_.text-muted-foreground]:text-white/65"
+          : "sticky top-0 z-50 w-full border-b bg-background shadow-sm"
+      }
+    >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
@@ -104,7 +112,11 @@ export const Header = ({ minimal = false }: { minimal?: boolean } = {}) => {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   placeholder="Search courses..."
-                  className="pl-10 pr-8 bg-muted/50"
+                  className={
+                    isHome
+                      ? "pl-10 pr-8 border-white/15 bg-white/10 text-white placeholder:text-white/50"
+                      : "pl-10 pr-8 bg-muted/50"
+                  }
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -260,12 +272,21 @@ export const Header = ({ minimal = false }: { minimal?: boolean } = {}) => {
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <Link to="/auth?tab=login">
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
+                  <Button
+                    variant="outline"
+                    className={
+                      isHome
+                        ? "border-white/40 bg-transparent text-white hover:bg-white/10"
+                        : "border-primary text-primary hover:bg-primary/10"
+                    }
+                  >
                     Login
                   </Button>
                 </Link>
                 <Link to="/auth?tab=signup">
-                  <Button>Sign Up</Button>
+                  <Button className={isHome ? "bg-white !text-[#011425] hover:bg-white/90" : undefined}>
+                    Sign Up
+                  </Button>
                 </Link>
               </>
             )}
@@ -275,7 +296,7 @@ export const Header = ({ minimal = false }: { minimal?: boolean } = {}) => {
           <Button 
             variant="ghost" 
             size="icon" 
-            className="lg:hidden"
+            className={isHome ? "lg:hidden text-white hover:bg-white/10" : "lg:hidden"}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Menu className="w-5 h-5" />

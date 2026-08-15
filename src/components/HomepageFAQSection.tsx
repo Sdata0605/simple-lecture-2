@@ -49,7 +49,7 @@ export const HomepageFAQSection = forwardRef<HTMLElement>((_, ref) => {
   return (
     <section ref={ref} className="py-16 bg-background">
       <div className="container mx-auto px-4 max-w-3xl">
-        <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+        <h2 className="text-3xl font-serif font-light text-center mb-8 text-[#011425]">Frequently Asked Questions</h2>
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, i) => (
             <AccordionItem key={i} value={`faq-${i}`}>

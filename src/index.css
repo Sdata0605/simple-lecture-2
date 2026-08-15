@@ -8,31 +8,32 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 122 33% 90%;
-    --foreground: 158 62% 14%;
+    /* Palette: #FFFFFF, #242424, #5C7C89, #1F4959, #011425 */
+    --background: 200 20% 97%;
+    --foreground: 208 95% 8%;
 
-    --card: 115 35% 94%;
-    --card-foreground: 158 62% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 208 95% 8%;
 
-    --popover: 115 35% 94%;
-    --popover-foreground: 158 62% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 208 95% 8%;
 
-    --primary: 158 62% 14%;
-    --primary-foreground: 115 35% 94%;
+    --primary: 197 48% 24%;
+    --primary-foreground: 0 0% 100%;
 
-    --primary-glow: 152 56% 27%;
-    --primary-dark: 160 65% 10%;
+    --primary-glow: 197 20% 45%;
+    --primary-dark: 208 95% 8%;
 
-    --secondary: 118 32% 83%;
-    --secondary-foreground: 158 62% 14%;
+    --secondary: 197 16% 90%;
+    --secondary-foreground: 208 95% 8%;
 
-    --muted: 118 28% 88%;
-    --muted-foreground: 158 25% 30%;
+    --muted: 197 14% 93%;
+    --muted-foreground: 197 16% 32%;
 
-    --accent: 152 56% 27%;
-    --accent-foreground: 115 35% 94%;
+    --accent: 197 20% 45%;
+    --accent-foreground: 0 0% 100%;
 
-    --success: 152 56% 35%;
+    --success: 197 40% 32%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
@@ -41,61 +42,61 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 122 22% 80%;
-    --input: 122 22% 80%;
-    --ring: 152 56% 27%;
+    --border: 197 14% 84%;
+    --input: 197 14% 84%;
+    --ring: 197 48% 24%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(158 62% 14%), hsl(152 56% 27%));
-    --gradient-hero: linear-gradient(135deg, hsl(122 33% 90%) 0%, hsl(118 32% 83%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(115 35% 94%) 0%, hsl(118 28% 88%) 100%);
-    --shadow-soft: 0 4px 24px -2px hsl(158 62% 14% / 0.15);
-    --shadow-hover: 0 8px 32px -4px hsl(158 62% 14% / 0.25);
+    --gradient-primary: linear-gradient(135deg, hsl(208 95% 8%), hsl(197 48% 24%));
+    --gradient-hero: linear-gradient(180deg, hsl(208 95% 8%) 0%, hsl(197 48% 24%) 58%, hsl(197 20% 45%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(200 20% 97%) 100%);
+    --shadow-soft: 0 4px 24px -2px hsl(208 95% 8% / 0.12);
+    --shadow-hover: 0 8px 32px -4px hsl(197 48% 24% / 0.22);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 115 35% 94%;
-    --sidebar-foreground: 158 62% 14%;
-    --sidebar-primary: 158 62% 14%;
-    --sidebar-primary-foreground: 115 35% 94%;
-    --sidebar-accent: 118 32% 83%;
-    --sidebar-accent-foreground: 158 62% 14%;
-    --sidebar-border: 122 22% 80%;
-    --sidebar-ring: 152 56% 27%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 208 95% 8%;
+    --sidebar-primary: 197 48% 24%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 197 16% 90%;
+    --sidebar-accent-foreground: 208 95% 8%;
+    --sidebar-border: 197 14% 84%;
+    --sidebar-ring: 197 48% 24%;
 
     /* Book reader (Notes pilot) */
     --book-page: 38 44% 94%;
     --book-ink: 25 30% 18%;
-    --book-accent: 152 56% 27%;
+    --book-accent: 197 48% 24%;
   }
 
 
   .dark {
-    --background: 158 50% 8%;
-    --foreground: 115 35% 94%;
+    --background: 208 95% 8%;
+    --foreground: 0 0% 100%;
 
-    --card: 158 45% 12%;
-    --card-foreground: 115 35% 94%;
+    --card: 197 40% 14%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 158 45% 12%;
-    --popover-foreground: 115 35% 94%;
+    --popover: 197 40% 14%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 152 56% 45%;
-    --primary-foreground: 158 62% 10%;
+    --primary: 197 20% 55%;
+    --primary-foreground: 208 95% 8%;
 
-    --primary-glow: 131 27% 60%;
-    --primary-dark: 158 62% 14%;
+    --primary-glow: 197 20% 45%;
+    --primary-dark: 208 95% 8%;
 
-    --secondary: 158 35% 18%;
-    --secondary-foreground: 115 35% 94%;
+    --secondary: 197 30% 16%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 158 35% 18%;
-    --muted-foreground: 131 20% 70%;
+    --muted: 197 28% 16%;
+    --muted-foreground: 197 14% 72%;
 
-    --accent: 131 27% 60%;
-    --accent-foreground: 158 62% 10%;
+    --accent: 197 20% 45%;
+    --accent-foreground: 0 0% 100%;
 
-    --success: 152 56% 45%;
+    --success: 197 30% 42%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
@@ -104,28 +105,28 @@ All colors MUST be HSL.
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 158 30% 22%;
-    --input: 158 30% 22%;
-    --ring: 152 56% 45%;
+    --border: 197 22% 20%;
+    --input: 197 22% 20%;
+    --ring: 197 20% 55%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(158 62% 14%), hsl(152 56% 45%));
-    --gradient-hero: linear-gradient(135deg, hsl(158 50% 8%) 0%, hsl(158 45% 12%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(158 45% 12%) 0%, hsl(158 50% 10%) 100%);
-    --shadow-soft: 0 4px 24px -2px hsl(152 56% 45% / 0.2);
-    --shadow-hover: 0 8px 32px -4px hsl(152 56% 45% / 0.3);
-    --sidebar-background: 158 45% 11%;
-    --sidebar-foreground: 115 35% 94%;
-    --sidebar-primary: 152 56% 45%;
-    --sidebar-primary-foreground: 158 62% 10%;
-    --sidebar-accent: 158 35% 18%;
-    --sidebar-accent-foreground: 115 35% 94%;
-    --sidebar-border: 158 30% 22%;
-    --sidebar-ring: 152 56% 45%;
+    --gradient-primary: linear-gradient(135deg, hsl(208 95% 8%), hsl(197 48% 24%));
+    --gradient-hero: linear-gradient(180deg, hsl(208 95% 8%) 0%, hsl(197 48% 24%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(197 40% 14%) 0%, hsl(208 95% 8%) 100%);
+    --shadow-soft: 0 4px 24px -2px hsl(208 95% 8% / 0.35);
+    --shadow-hover: 0 8px 32px -4px hsl(197 20% 45% / 0.3);
+    --sidebar-background: 208 80% 9%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 197 20% 55%;
+    --sidebar-primary-foreground: 208 95% 8%;
+    --sidebar-accent: 197 30% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 197 22% 20%;
+    --sidebar-ring: 197 20% 55%;
 
     /* Book reader (Notes pilot) */
     --book-page: 38 30% 88%;
     --book-ink: 25 20% 15%;
-    --book-accent: 152 56% 30%;
+    --book-accent: 197 48% 24%;
   }
 }
 
@@ -137,7 +138,11 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif;
   }
 }
 

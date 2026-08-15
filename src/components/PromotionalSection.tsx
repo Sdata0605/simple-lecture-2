@@ -19,7 +19,7 @@ export const PromotionalSection = () => {
           </Badge>
 
           {/* Heading */}
-          <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+          <h2 className="text-4xl md:text-6xl font-serif font-light text-white leading-tight">
             Complete Education at
             <span className="block mt-2">₹1000 + GST Per Course</span>
           </h2>

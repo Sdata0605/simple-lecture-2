@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   CheckCircle2,
-  ArrowRight,
   AlertCircle,
   RefreshCw,
 } from "lucide-react";
@@ -16,9 +15,6 @@ import { HeroLecturePlayer } from "@/components/HeroLecturePlayer";
 import { HeroV4Launcher } from "@/components/HeroV4Launcher";
 import { HOMEPAGE_HERO_LECTURE } from "@/lib/homepageHeroLecture";
 import headerIcon from "@/assets/header-icon.jpeg";
-
-// Only import first hero image statically - others loaded after first paint
-import heroBoardExams from "@/assets/hero-board-exams.jpg";
 
 // Lazy-load heavy components
 const HamburgerMenu = lazy(() => import("./HamburgerMenu").then(m => ({ default: m.HamburgerMenu })));
@@ -70,7 +66,6 @@ export const MobileHomeContent = () => {
   const navigate = useNavigate();
   
   const [currentSlide, setCurrentSlide] = useState(0);
-  const heroImages = [heroBoardExams, heroBoardExams, heroBoardExams];
   
   const { data: user, isLoading: userLoading } = useCurrentUser();
   const { isAuthenticated } = useAuth();
@@ -101,10 +96,7 @@ export const MobileHomeContent = () => {
   }, []);
 
 
-  const heroSlides = heroSlideData.map((slide, index) => ({
-    ...slide,
-    image: heroImages[index],
-  }));
+  const heroSlides = heroSlideData;
 
   // Error state
   if (hasError) {
@@ -112,9 +104,9 @@ export const MobileHomeContent = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-[#F7F9FA] pb-24">
       {/* Native App Header */}
-      <div className="bg-gradient-to-br from-primary via-primary to-primary px-4 pt-10 pb-6">
+      <div className="bg-[#011425] px-4 pt-10 pb-6">
         <div className="flex items-start justify-between mb-5">
           <div className="flex items-start gap-3">
             <div className="text-white [&_button]:text-white [&_button]:hover:bg-white/10 mt-1">
@@ -148,10 +140,16 @@ export const MobileHomeContent = () => {
       </div>
 
       {/* Hero Section - Fixed dimensions for CLS */}
-      <div className="relative overflow-hidden" style={{ height: '256px' }}>
+      <div className="relative overflow-hidden bg-[#011425]" style={{ height: '256px' }}>
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 90% at 50% 40%, #1F4959 0%, #011425 70%)",
+          }}
+        />
         {heroSlides.map((slide, index) => {
           const isActive = currentSlide === index;
-          const isFirst = index === 0;
           return (
           <div
             key={index}
@@ -159,41 +157,27 @@ export const MobileHomeContent = () => {
               isActive ? "opacity-100" : "opacity-0"
             }`}
           >
-            {/* Always render first slide image for LCP; conditionally render others */}
-            {(isFirst || isActive) && (
-              <img
-                src={slide.image}
-                alt={slide.title}
-                className="w-full h-full object-cover"
-                width={414}
-                height={256}
-                {...(isFirst ? ({ fetchpriority: 'high' } as any) : { loading: 'lazy' as const })}
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
-            
             <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-              <h2 className="text-xl font-bold leading-tight mb-1">{slide.title}</h2>
-              <p className="text-white/80 text-xs mb-2">{slide.subtitle}</p>
+              <h2 className="font-serif font-light text-2xl leading-tight mb-1">{slide.title}</h2>
+              <p className="text-white/75 text-xs mb-3 font-serif">{slide.subtitle}</p>
               
               <div className="space-y-1 mb-3">
                 {slide.points.map((point, i) => (
                   <div key={i} className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3 h-3 text-green-400 flex-shrink-0" />
+                    <CheckCircle2 className="w-3 h-3 text-[#5C7C89] flex-shrink-0" />
                     <span className="text-[11px] text-white/90">{point}</span>
                   </div>
                 ))}
               </div>
               
               <div className="flex items-center gap-2 flex-wrap">
-                <Button 
-                  size="sm"
-                  className="bg-white text-primary hover:bg-white/90 text-xs h-8 px-4"
+                <button
+                  type="button"
+                  className="font-serif text-sm text-white underline decoration-white/70 underline-offset-4"
                   onClick={() => navigate("/course/Class-10")}
                 >
                   {slide.cta}
-                  <ArrowRight className="ml-1 w-3 h-3" />
-                </Button>
+                </button>
                 <Button
                   size="sm"
                   variant="outline"

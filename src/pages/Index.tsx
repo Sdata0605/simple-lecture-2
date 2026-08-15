@@ -13,7 +13,6 @@ import { lazyWithRetry } from "@/lib/lazyWithRetry";
 import { SmartHeader } from "@/components/SmartHeader";
 import { Hero } from "@/components/Hero";
 import { ExploreProgramsSection } from "@/components/ExploreProgramsSection";
-import heroBoardExams from "@/assets/hero-board-exams.jpg";
 
 // Below-the-fold — lazy-loaded with retry
 const BestsellersSection = lazyWithRetry(() => import("@/components/BestsellersSection").then(m => ({ default: m.BestsellersSection })));
@@ -95,9 +94,8 @@ const Index = () => {
         keywords={SEO_KEYWORDS}
         canonicalUrl="https://simplelecture.com"
         structuredData={structuredData}
-        preloadImage={heroBoardExams}
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-[#F7F9FA]">
         <SmartHeader />
         <main>
           <Hero heroVideoSettings={homepageData?.heroVideoSettings} />

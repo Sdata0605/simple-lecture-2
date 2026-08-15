@@ -6,7 +6,7 @@ import { Mail, Phone, MapPin, BookOpen, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import headerIcon from "@/assets/header-icon.jpeg";
 export const Footer = () => {
-  return <footer className="bg-card border-t">
+  return <footer className="bg-[#011425] text-white border-t border-white/10 [&_.text-muted-foreground]:text-white/65 [&_a:hover]:text-white">
       {/* Main Footer */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
