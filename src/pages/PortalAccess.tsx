@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft, ArrowRight, BarChart3, BookOpen, Building2, CalendarDays,
   CheckCircle2, ClipboardList, Eye, EyeOff, GraduationCap, HelpCircle,
-  LayoutDashboard, LockKeyhole, Mail, Menu, Settings, ShieldCheck, Sparkles,
+  LayoutDashboard, LockKeyhole, Mail, Menu, Settings, ShieldCheck,
   UserCog, Users, X,
 } from "lucide-react";
 import logo from "@/assets/website-logo.png";
@@ -15,7 +15,7 @@ const roleCopy = {
     eyebrow: "Academic workspace",
     title: "Faculty Portal",
     description: "Manage teaching, learning resources, assessments and student progress from one focused workspace.",
-    accent: "from-blue-600 to-indigo-700",
+    accent: "from-[#1555b6] to-[#083d96]",
     light: "bg-blue-50 text-blue-700",
     icon: GraduationCap,
     idLabel: "Faculty ID or email",
@@ -25,8 +25,8 @@ const roleCopy = {
     eyebrow: "Institutional workspace",
     title: "Administrative Portal",
     description: "Secure access for operations, governance, reporting and institution-wide configuration.",
-    accent: "from-slate-800 to-slate-950",
-    light: "bg-slate-100 text-slate-800",
+    accent: "from-[#079a9d] to-[#04777d]",
+    light: "bg-teal-50 text-teal-700",
     icon: ShieldCheck,
     idLabel: "Administrator ID or email",
     placeholder: "e.g. ADM-2048",
@@ -46,44 +46,55 @@ const portalNav = {
 
 export function PortalChooser() {
   const portals = [
-    { title: "Student Login", text: "Continue learning, access courses, tests, notes and your personal dashboard.", icon: BookOpen, href: "/student-login?tab=login", badge: "Learner access", color: "from-orange-500 to-rose-500", rank: "01" },
-    { title: "Faculty Login", text: "Manage classes, learning content, assessments and student performance.", icon: GraduationCap, href: "/portal/faculty", badge: "Academic access", color: "from-blue-600 to-indigo-700", rank: "02" },
-    { title: "Administrative Login", text: "Oversee people, academics, operations, reports and platform settings.", icon: ShieldCheck, href: "/portal/administrative", badge: "Authorized access", color: "from-slate-700 to-slate-950", rank: "03" },
+    { title: "Student Login", text: "Courses, tests, notes and learning dashboard", icon: BookOpen, href: "/student-login?tab=login", badge: "Learner access", color: "from-[#55a4e8] to-[#397fc8]", glow: "shadow-blue-200/60", rank: "01" },
+    { title: "Faculty Login", text: "Classes, content, assessments and performance", icon: GraduationCap, href: "/portal/faculty", badge: "Academic access", color: "from-[#1555b6] to-[#083d96]", glow: "shadow-blue-300/60", rank: "02" },
+    { title: "Administrative Login", text: "People, academics, reports and operations", icon: ShieldCheck, href: "/portal/administrative", badge: "Authorized access", color: "from-[#10aeb0] to-[#07878d]", glow: "shadow-teal-200/60", rank: "03" },
   ];
 
   return (
-    <main className="min-h-screen bg-[#f7f8fb] text-slate-900">
-      <div className="absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(circle_at_15%_10%,rgba(249,115,22,.16),transparent_34%),radial-gradient(circle_at_85%_0%,rgba(37,99,235,.12),transparent_36%)]" />
-      <header className="relative border-b border-slate-200/80 bg-white/80 backdrop-blur-xl">
+    <main className="relative min-h-screen overflow-hidden bg-[#edf6fc] font-['Poppins',sans-serif] text-slate-900">
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#d9efff_0%,#e8f7ff_49.8%,#14b0d0_49.8%,#1763cc_100%)]" />
+      <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,.24)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.24)_1px,transparent_1px)] [background-size:36px_36px]" />
+      <div className="absolute -right-24 bottom-[-80px] h-[520px] w-[520px] rounded-full border-[90px] border-white/10" />
+      <header className="relative border-b border-white/30 bg-white/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
           <Link to="/" className="flex items-center"><img src={logo} alt="Simple Lecture" className="h-9 w-auto" /></Link>
-          <div className="flex items-center gap-2 text-sm text-slate-500"><LockKeyhole className="h-4 w-4" /> Secure portal access</div>
+          <div className="flex items-center gap-2 rounded-full bg-[#eef7ff] px-4 py-2 text-xs font-semibold text-[#1555b6]"><LockKeyhole className="h-4 w-4" /> Secure portal access</div>
         </div>
       </header>
 
-      <section className="relative mx-auto max-w-7xl px-5 pb-20 pt-14 lg:px-8 lg:pt-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-xs font-bold uppercase tracking-[.18em] text-orange-700"><Sparkles className="h-3.5 w-3.5" /> Simple Lecture Digital Campus</div>
-          <h1 className="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">Choose your access portal</h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">One connected campus, purpose-built for every role. Select your portal to continue.</p>
-        </div>
+      <section className="relative mx-auto max-w-6xl px-5 pb-16 pt-10 lg:px-8 lg:pt-14">
+        <div className="rounded-[28px] border border-white/70 bg-white/90 p-6 shadow-[0_28px_90px_-30px_rgba(0,50,120,.42)] backdrop-blur-xl sm:p-9 lg:p-12">
+          <div className="flex flex-col justify-between gap-6 border-b border-slate-200 pb-8 md:flex-row md:items-end">
+            <div>
+              <div className="mb-3 text-xs font-bold uppercase tracking-[.22em] text-[#1763c7]">Simple Lecture Digital Campus</div>
+              <h1 className="text-3xl font-extrabold uppercase tracking-tight text-[#161616] sm:text-4xl">Online learning platform</h1>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">Choose the secure workspace designed for your role.</p>
+            </div>
+            <div className="hidden rounded-xl bg-[#eaf6ff] px-4 py-3 text-right text-xs text-[#1763c7] sm:block"><strong className="block text-sm">One connected campus</strong>Learn · Teach · Manage</div>
+          </div>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {portals.map(({ title, text, icon: Icon, href, badge, color, rank }) => (
-            <Link key={title} to={href} className="group relative overflow-hidden rounded-[28px] border border-slate-200 bg-white p-7 shadow-[0_16px_50px_-28px_rgba(15,23,42,.3)] transition duration-300 hover:-translate-y-2 hover:border-slate-300 hover:shadow-[0_28px_70px_-30px_rgba(15,23,42,.38)]">
-              <div className="absolute right-5 top-3 text-7xl font-black text-slate-50 transition group-hover:text-slate-100">{rank}</div>
-              <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${color} text-white shadow-lg`}><Icon className="h-7 w-7" /></div>
-              <div className="relative mt-8 text-xs font-bold uppercase tracking-[.16em] text-slate-400">{badge}</div>
-              <h2 className="relative mt-2 text-2xl font-extrabold">{title}</h2>
-              <p className="relative mt-3 min-h-[72px] leading-6 text-slate-600">{text}</p>
-              <div className="relative mt-7 flex items-center justify-between border-t border-slate-100 pt-5 font-bold text-slate-900">Enter portal <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-950 text-white transition group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span></div>
-            </Link>
-          ))}
-        </div>
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {portals.map(({ title, text, icon: Icon, href, badge, color, glow, rank }) => (
+              <Link key={title} to={href} className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${color} p-[1px] shadow-xl ${glow} transition duration-300 hover:-translate-y-2 hover:shadow-2xl`}>
+                <div className="relative flex min-h-[238px] flex-col overflow-hidden rounded-[15px] text-white">
+                  <div className="absolute -right-8 -top-10 h-36 w-36 rounded-full border-[28px] border-white/10" />
+                  <div className="flex flex-1 flex-col items-center justify-center px-6 pb-4 pt-7 text-center">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/25 backdrop-blur"><Icon className="h-10 w-10" /></div>
+                    <div className="mt-4 text-[10px] font-bold uppercase tracking-[.2em] text-white/65">{badge} · {rank}</div>
+                    <h2 className="mt-1 text-xl font-bold uppercase tracking-wide">{title}</h2>
+                    <p className="mt-2 text-xs leading-5 text-white/75">{text}</p>
+                  </div>
+                  <div className="flex items-center justify-between border-t border-white/20 bg-white/15 px-5 py-4 text-sm font-bold uppercase tracking-wider backdrop-blur-sm">Enter portal <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></div>
+                </div>
+              </Link>
+            ))}
+          </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white/70 px-5 py-4 text-sm text-slate-500 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row">
           <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Protected by secure, role-based access</span>
-          <Link to="/support" className="flex items-center gap-2 font-semibold text-slate-700 hover:text-orange-600"><HelpCircle className="h-4 w-4" /> Need help signing in?</Link>
+          <Link to="/support" className="flex items-center gap-2 font-semibold text-[#1763c7] hover:text-[#079a9d]"><HelpCircle className="h-4 w-4" /> Need help signing in?</Link>
+          </div>
         </div>
       </section>
     </main>
@@ -100,7 +111,7 @@ export function StaffLogin() {
   const handleSubmit = (event: FormEvent) => { event.preventDefault(); navigate(`/portal/${role}/workspace`); };
 
   return (
-    <main className="grid min-h-screen bg-white lg:grid-cols-[1.08fr_.92fr]">
+    <main className="grid min-h-screen bg-white font-['Poppins',sans-serif] lg:grid-cols-[1.08fr_.92fr]">
       <section className={`relative hidden overflow-hidden bg-gradient-to-br ${copy.accent} p-12 text-white lg:flex lg:flex-col lg:justify-between`}>
         <div className="absolute -right-20 top-24 h-80 w-80 rounded-full border border-white/10" /><div className="absolute -right-2 top-44 h-52 w-52 rounded-full border border-white/10" />
         <Link to="/" className="relative"><img src={logo} alt="Simple Lecture" className="h-10 w-auto brightness-0 invert" /></Link>
@@ -113,11 +124,11 @@ export function StaffLogin() {
         <div className="relative flex items-center gap-3 text-sm text-white/60"><ShieldCheck className="h-5 w-5" /> Restricted to verified Simple Lecture personnel</div>
       </section>
 
-      <section className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_100%_0%,rgba(249,115,22,.08),transparent_30%)] px-5 py-12 sm:px-10">
+      <section className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_100%_0%,rgba(20,176,208,.14),transparent_35%),#f5faff] px-5 py-12 sm:px-10">
         <div className="w-full max-w-md">
           <Link to="/auth" className="mb-10 inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-950"><ArrowLeft className="h-4 w-4" /> All login options</Link>
           <div className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl ${copy.light} lg:hidden`}><Icon className="h-6 w-6" /></div>
-          <p className="text-xs font-extrabold uppercase tracking-[.2em] text-orange-600">{copy.eyebrow}</p>
+          <p className="text-xs font-extrabold uppercase tracking-[.2em] text-[#1763c7]">{copy.eyebrow}</p>
           <h2 className="mt-2 text-4xl font-black tracking-tight text-slate-950">{copy.title}</h2>
           <p className="mt-3 text-slate-500">Enter your institutional credentials to continue.</p>
 
@@ -143,7 +154,7 @@ export function StaffWorkspace() {
   const items = portalNav[role];
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 lg:grid lg:grid-cols-[280px_1fr]">
+    <main className="min-h-screen bg-[#f3f8fc] font-['Poppins',sans-serif] text-slate-900 lg:grid lg:grid-cols-[280px_1fr]">
       <aside className={`${mobileOpen ? "fixed inset-0 z-50 flex" : "hidden"} bg-slate-950 text-white lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col`}>
         <div className="flex h-full w-[280px] flex-col bg-slate-950 p-5">
           <div className="flex items-center justify-between"><img src={logo} alt="Simple Lecture" className="h-8 w-auto brightness-0 invert" /><button onClick={() => setMobileOpen(false)} className="lg:hidden"><X /></button></div>
@@ -164,4 +175,3 @@ export function StaffWorkspace() {
     </main>
   );
 }
-
