@@ -28,6 +28,9 @@ import NotFound from "./pages/NotFound";
 // Auth pages lazy loaded - not needed on initial homepage visit
 const Auth = lazyWithRetry(() => import("./pages/Auth"));
 const ForgotPassword = lazyWithRetry(() => import("./pages/ForgotPassword"));
+const PortalChooser = lazyWithRetry(() => import("./pages/PortalAccess").then(m => ({ default: m.PortalChooser })));
+const StaffLogin = lazyWithRetry(() => import("./pages/PortalAccess").then(m => ({ default: m.StaffLogin })));
+const StaffWorkspace = lazyWithRetry(() => import("./pages/PortalAccess").then(m => ({ default: m.StaffWorkspace })));
 
 // Helper component to redirect encoded auth URLs to proper URLs
 const AuthRedirect = ({ tab }: { tab: string }) => <Navigate to={`/auth?tab=${tab}`} replace />;
@@ -311,7 +314,10 @@ const App = () => (
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/auth" element={<Auth />} />
+                <Route path="/auth" element={<PortalChooser />} />
+                <Route path="/student-login" element={<Auth />} />
+                <Route path="/portal/:role" element={<StaffLogin />} />
+                <Route path="/portal/:role/workspace" element={<StaffWorkspace />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 {/* Handle encoded URL - redirect /auth%3Ftab=login to /auth?tab=login */}
                 <Route path="/auth%3Ftab=login" element={<AuthRedirect tab="login" />} />
