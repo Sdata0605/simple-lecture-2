@@ -21,7 +21,7 @@ import { SEOHead } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { BottomNav } from "@/components/mobile/BottomNav";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Sparkles, Users, Award, Zap, Shield, Smartphone, ArrowLeft, Loader2, Mail, KeyRound, ChevronRight, MessageSquare, Info, ShieldCheck, Bot, MessageCircle, FileText, Globe, Tag, Quote } from "lucide-react";
+import { Sparkles, Users, Award, Zap, Shield, Smartphone, ArrowLeft, Loader2, Mail, KeyRound, ChevronRight, MessageSquare, Info, ShieldCheck, Bot, MessageCircle, FileText, Globe, Tag, Quote, UserRound, CheckCircle2, GraduationCap } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { supabase } from "@/integrations/supabase/client";
 import { safeSessionStorage } from "@/lib/safeStorage";
@@ -46,7 +46,7 @@ const benefits = [
 import { SUPABASE_URL } from '@/lib/supabaseUrl';
 const SUPABASE_BASE_URL = SUPABASE_URL;
 
-type AuthMethod = "phone" | "emailOtp" | "email";
+type AuthMethod = "phone" | "whatsapp" | "emailOtp" | "email" | "username";
 
 // Moved outside Auth to prevent re-mount on every state change
 const OtpVerifyForm = ({
@@ -122,34 +122,24 @@ const OtpVerifyForm = ({
 
 // Moved outside Auth to prevent re-mount on every state change
 const MethodToggle = ({ method, setMethod }: { method: AuthMethod; setMethod: (m: AuthMethod) => void }) => (
-  <div className="flex gap-1.5 mb-4">
-    <Button
-      type="button"
-      variant={method === "phone" ? "default" : "outline"}
-      className="flex-1 h-9 text-xs px-2"
-      onClick={() => setMethod("phone")}
-    >
-      <Smartphone className="h-3.5 w-3.5 mr-1" />
-      Phone OTP
-    </Button>
-    <Button
-      type="button"
-      variant={method === "emailOtp" ? "default" : "outline"}
-      className="flex-1 h-9 text-xs px-2"
-      onClick={() => setMethod("emailOtp")}
-    >
-      <Mail className="h-3.5 w-3.5 mr-1" />
-      Email OTP
-    </Button>
-    <Button
-      type="button"
-      variant={method === "email" ? "default" : "outline"}
-      className="flex-1 h-9 text-xs px-2"
-      onClick={() => setMethod("email")}
-    >
-      <KeyRound className="h-3.5 w-3.5 mr-1" />
-      Password
-    </Button>
+  <div className="grid grid-cols-2 gap-2 mb-6" role="tablist" aria-label="Student login methods">
+    {[
+      { value: "username" as AuthMethod, label: "Username", icon: UserRound },
+      { value: "whatsapp" as AuthMethod, label: "WhatsApp", icon: MessageSquare },
+      { value: "phone" as AuthMethod, label: "Mobile OTP", icon: Smartphone },
+      { value: "emailOtp" as AuthMethod, label: "Email OTP", icon: Mail },
+    ].map(({ value, label, icon: Icon }) => (
+      <button
+        key={value}
+        type="button"
+        role="tab"
+        aria-selected={method === value}
+        onClick={() => setMethod(value)}
+        className={`flex h-12 items-center justify-center gap-2 rounded-xl border text-sm font-semibold transition-all ${method === value ? "border-[#1b67d8] bg-[#1b67d8] text-white shadow-md shadow-blue-200" : "border-slate-200 bg-slate-50 text-slate-600 hover:border-blue-200 hover:bg-blue-50"}`}
+      >
+        <Icon className="h-4 w-4" /> {label}
+      </button>
+    ))}
   </div>
 );
 
@@ -166,7 +156,7 @@ const Auth = () => {
   const isMobile = useIsMobile();
 
   // Login state
-  const [loginMethod, setLoginMethod] = useState<AuthMethod>("phone");
+  const [loginMethod, setLoginMethod] = useState<AuthMethod>("username");
   const [loginPhone, setLoginPhone] = useState("");
   const [loginPhoneChannel, setLoginPhoneChannel] = useState<"sms" | "whatsapp">("sms");
   const [loginStep, setLoginStep] = useState<"input" | "otp">("input");
@@ -609,11 +599,28 @@ const Auth = () => {
         </div>
       </div>
 
-      <div className="min-h-screen bg-background pt-2 md:pt-6 pb-10 md:pb-6">
-        <div className="container mx-auto px-4 md:px-8 py-2 md:py-4 pb-safe">
-          <div className="md:grid md:grid-cols-2 md:gap-8 max-w-7xl mx-auto items-center">
+      <div className="min-h-screen bg-[#edf3f8] py-0 md:grid md:place-items-center md:px-8 md:py-10">
+        <div className="w-full max-w-6xl pb-safe">
+          <div className="overflow-hidden bg-white md:grid md:min-h-[690px] md:grid-cols-[1.02fr_.98fr] md:rounded-[28px] md:border md:border-white/80 md:shadow-[0_30px_90px_rgba(15,45,80,0.18)]">
             {/* Left promo panel (desktop only) */}
-            <aside className="hidden md:flex flex-col gap-8 pr-4">
+            <aside className="relative hidden overflow-hidden bg-gradient-to-br from-[#0c3564] via-[#126db1] to-[#10a6aa] p-12 text-white md:flex md:flex-col">
+              <div className="absolute -right-28 -top-28 h-80 w-80 rounded-full border-[48px] border-white/10" />
+              <div className="absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-cyan-300/15 blur-sm" />
+              <div className="relative z-10 flex h-full flex-col">
+                <Link to="/" className="inline-flex w-fit rounded-xl bg-white px-4 py-2.5 shadow-lg shadow-blue-950/10">
+                  <img src={logo} alt="SimpleLecture" className="h-9 w-auto" />
+                </Link>
+                <div className="my-auto py-12">
+                  <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] backdrop-blur"><GraduationCap className="h-4 w-4" /> Student learning portal</div>
+                  <h1 className="max-w-md text-4xl font-black leading-[1.13] tracking-tight lg:text-5xl">Your classroom,<br />always within reach.</h1>
+                  <p className="mt-5 max-w-md text-sm leading-7 text-blue-50/90">Access live classes, recorded lessons, assignments, tests and your complete academic progress from one secure account.</p>
+                  <div className="mt-9 grid max-w-md grid-cols-2 gap-4">
+                    {["Learn in Kannada & English", "AI-powered doubt support", "Tests and assignments", "Progress in one place"].map((item) => <div key={item} className="flex items-center gap-2.5 text-sm font-medium text-white/95"><CheckCircle2 className="h-4 w-4 shrink-0 text-cyan-200" />{item}</div>)}
+                  </div>
+                </div>
+                <div className="relative z-10 flex items-center justify-between border-t border-white/20 pt-6 text-xs text-blue-50/80"><span>SimpleLecture Student Services</span><span>Secure • Reliable • Accessible</span></div>
+              </div>
+              <div className="hidden">
               <Link to="/" className="flex items-center gap-3">
                 <img src={logo} alt="SimpleLecture" className="h-10" />
               </Link>
@@ -666,14 +673,15 @@ const Auth = () => {
                 <Shield className="h-4 w-4 text-primary" />
                 <span>Trusted by students across Karnataka</span>
               </div>
+              </div>
             </aside>
 
             {/* Right column: auth card */}
-            <div className="max-w-md w-full mx-auto md:mx-0">
+            <div className="mx-auto flex w-full max-w-xl items-center px-5 py-7 sm:px-9 md:px-12 md:py-10">
               <div className="flex items-center">
 
-              <Card className="w-full shadow-none border-0 bg-transparent md:shadow-xl md:border md:bg-card md:rounded-2xl">
-                <CardContent className="p-0 md:p-6">
+              <Card className="w-full border-0 bg-transparent shadow-none">
+                <CardContent className="p-0">
                   <Tabs value={activeTab} onValueChange={(v) => {
                     setActiveTab(v);
                     // Only reset state on genuine user interaction, not during hydration restore
@@ -706,6 +714,103 @@ const Auth = () => {
 
                     {/* ===== LOGIN TAB ===== */}
                     <TabsContent value="login">
+                      <div className="student-login-panel">
+                        <div className="mb-6">
+                          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#1764c0]">
+                            <GraduationCap className="h-4 w-4" /> Student portal
+                          </div>
+                          <h2 className="text-3xl font-black tracking-tight text-[#10345f]">Login to your account</h2>
+                          <p className="mt-2 text-sm leading-6 text-slate-500">Choose your preferred secure login method to continue learning.</p>
+                        </div>
+
+                        <MethodToggle method={loginMethod} setMethod={(method) => {
+                          setLoginMethod(method);
+                          setLoginStep("input");
+                          setLoginOtp("");
+                          if (method === "whatsapp") setLoginPhoneChannel("whatsapp");
+                          if (method === "phone") setLoginPhoneChannel("sms");
+                        }} />
+
+                        {(loginMethod === "username" || loginMethod === "email") && (
+                          <form onSubmit={handleEmailLogin} className="space-y-5">
+                            <div>
+                              <Label htmlFor="student-username" className="text-sm font-semibold text-slate-700">Username or email address</Label>
+                              <div className="relative mt-2">
+                                <UserRound className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                                <Input id="student-username" type="text" autoComplete="username" placeholder="Enter your username" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required className="h-12 rounded-xl border-slate-200 bg-white pl-11 focus-visible:ring-blue-500" />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex items-center justify-between">
+                                <Label htmlFor="student-password" className="text-sm font-semibold text-slate-700">Password</Label>
+                                <Link to="/forgot-password" className="text-xs font-semibold text-[#1764c0] hover:underline">Forgot password?</Link>
+                              </div>
+                              <div className="relative mt-2">
+                                <KeyRound className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                                <Input id="student-password" type="password" autoComplete="current-password" placeholder="Enter your password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required className="h-12 rounded-xl border-slate-200 bg-white pl-11 focus-visible:ring-blue-500" />
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Checkbox id="student-remember" checked={rememberMe} onCheckedChange={(v) => setRememberMe(v === true)} />
+                              <Label htmlFor="student-remember" className="cursor-pointer text-sm text-slate-600">Keep me signed in on this device</Label>
+                            </div>
+                            <Button type="submit" disabled={loading || !loginEmail || !loginPassword} className="h-12 w-full rounded-xl bg-gradient-to-r from-[#1559c5] to-[#168fae] text-base font-bold shadow-lg shadow-blue-200 hover:from-[#104da9] hover:to-[#117f9c]">
+                              {loading ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" />Signing in...</> : <>Login securely <ChevronRight className="ml-1 h-4 w-4" /></>}
+                            </Button>
+                          </form>
+                        )}
+
+                        {(loginMethod === "phone" || loginMethod === "whatsapp") && (
+                          loginStep === "input" ? (
+                            <form onSubmit={handleLoginSendPhoneOtp} className="space-y-5">
+                              <div className={`rounded-xl border p-4 ${loginMethod === "whatsapp" ? "border-emerald-200 bg-emerald-50" : "border-blue-100 bg-blue-50"}`}>
+                                <div className="flex items-start gap-3">
+                                  <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg text-white ${loginMethod === "whatsapp" ? "bg-[#20b868]" : "bg-[#1b67d8]"}`}>
+                                    {loginMethod === "whatsapp" ? <MessageSquare className="h-4 w-4" /> : <Smartphone className="h-4 w-4" />}
+                                  </div>
+                                  <div><p className="text-sm font-bold text-slate-800">{loginMethod === "whatsapp" ? "WhatsApp verification" : "Mobile number verification"}</p><p className="mt-0.5 text-xs leading-5 text-slate-500">A 6-digit OTP will be sent to your registered {loginMethod === "whatsapp" ? "WhatsApp account" : "mobile number"}.</p></div>
+                                </div>
+                              </div>
+                              <div>
+                                <Label htmlFor="student-mobile" className="text-sm font-semibold text-slate-700">Registered mobile number</Label>
+                                <div className="mt-2 flex gap-2">
+                                  <div className="grid h-12 w-16 shrink-0 place-items-center rounded-xl border border-slate-200 bg-slate-50 text-sm font-bold text-slate-700">+91</div>
+                                  <Input id="student-mobile" type="tel" inputMode="numeric" autoComplete="tel" placeholder="98765 43210" maxLength={10} value={loginPhone} onChange={(e) => setLoginPhone(e.target.value.replace(/\D/g, ""))} required className="h-12 rounded-xl border-slate-200 bg-white focus-visible:ring-blue-500" />
+                                </div>
+                              </div>
+                              <Button type="submit" disabled={loading || loginPhone.length !== 10} className={`h-12 w-full rounded-xl text-base font-bold shadow-lg ${loginMethod === "whatsapp" ? "bg-[#20b868] shadow-emerald-100 hover:bg-[#169b57]" : "bg-gradient-to-r from-[#1559c5] to-[#168fae] shadow-blue-200 hover:from-[#104da9] hover:to-[#117f9c]"}`}>
+                                {loading ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" />Sending OTP...</> : <>Send OTP via {loginMethod === "whatsapp" ? "WhatsApp" : "SMS"}<ChevronRight className="ml-1 h-4 w-4" /></>}
+                              </Button>
+                            </form>
+                          ) : (
+                            <OtpVerifyForm onSubmit={handleLoginVerifyPhoneOtp} otp={loginOtp} setOtp={setLoginOtp} onBack={() => { setLoginStep("input"); setLoginOtp(""); clearAuthFlowState(); }} sentTo={`+91 ${loginPhone}`} onResend={() => handleResendPhone(loginPhone, "login", loginMethod === "whatsapp" ? "whatsapp" : "sms")} buttonText="Verify & Login" loading={loading} resendCooldown={resendCooldown} />
+                          )
+                        )}
+
+                        {loginMethod === "emailOtp" && (
+                          loginStep === "input" ? (
+                            <form onSubmit={handleLoginSendEmailOtp} className="space-y-5">
+                              <div className="rounded-xl border border-cyan-100 bg-cyan-50 p-4">
+                                <div className="flex items-start gap-3"><div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#168fae] text-white"><Mail className="h-4 w-4" /></div><div><p className="text-sm font-bold text-slate-800">Email verification</p><p className="mt-0.5 text-xs leading-5 text-slate-500">We will send a secure 6-digit code to your registered email address.</p></div></div>
+                              </div>
+                              <div>
+                                <Label htmlFor="student-email-otp" className="text-sm font-semibold text-slate-700">Registered email address</Label>
+                                <div className="relative mt-2"><Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" /><Input id="student-email-otp" type="email" autoComplete="email" placeholder="student@example.com" value={loginEmailOtpEmail} onChange={(e) => setLoginEmailOtpEmail(e.target.value)} required className="h-12 rounded-xl border-slate-200 bg-white pl-11 focus-visible:ring-blue-500" /></div>
+                              </div>
+                              <Button type="submit" disabled={loading || !loginEmailOtpEmail} className="h-12 w-full rounded-xl bg-gradient-to-r from-[#1559c5] to-[#168fae] text-base font-bold shadow-lg shadow-blue-200 hover:from-[#104da9] hover:to-[#117f9c]">{loading ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" />Sending OTP...</> : <>Send OTP to email <ChevronRight className="ml-1 h-4 w-4" /></>}</Button>
+                            </form>
+                          ) : (
+                            <OtpVerifyForm onSubmit={handleLoginVerifyEmailOtp} otp={loginOtp} setOtp={setLoginOtp} onBack={() => { setLoginStep("input"); setLoginOtp(""); clearAuthFlowState(); }} sentTo={loginEmailOtpEmail} onResend={() => handleResendEmail(loginEmailOtpEmail, "login")} buttonText="Verify & Login" loading={loading} resendCooldown={resendCooldown} />
+                          )
+                        )}
+
+                        <div className="mt-7 border-t border-slate-100 pt-5 text-center">
+                          <p className="text-sm text-slate-500">New to SimpleLecture? <button type="button" onClick={() => setActiveTab("signup")} className="font-bold text-[#1764c0] hover:underline">Create student account</button></p>
+                          <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-slate-400"><ShieldCheck className="h-3.5 w-3.5 text-emerald-500" /> Your login is encrypted and securely protected</p>
+                        </div>
+                      </div>
+
+                      <div className="hidden">
                       {isMobile && !mobileMethodSelected ? (
                         <div className="flex flex-col min-h-[calc(100vh-12rem)]">
                           {/* Heading */}
@@ -1023,6 +1128,7 @@ const Auth = () => {
                       )}
                       </>
                       )}
+                      </div>
                     </TabsContent>
 
                     {/* ===== SIGN UP TAB ===== */}
