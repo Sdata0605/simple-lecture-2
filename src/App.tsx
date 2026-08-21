@@ -32,6 +32,7 @@ const PortalChooser = lazyWithRetry(() => import("./pages/PortalAccess").then(m 
 const StaffLogin = lazyWithRetry(() => import("./pages/PortalAccess").then(m => ({ default: m.StaffLogin })));
 const StaffWorkspace = lazyWithRetry(() => import("./pages/PortalAccess").then(m => ({ default: m.StaffWorkspace })));
 const FacultyPortal = lazyWithRetry(() => import("./pages/FacultyPortal"));
+const AdminPortal = lazyWithRetry(() => import("./pages/AdminPortal"));
 
 // Helper component to redirect encoded auth URLs to proper URLs
 const AuthRedirect = ({ tab }: { tab: string }) => <Navigate to={`/auth?tab=${tab}`} replace />;
@@ -321,6 +322,8 @@ const App = () => (
                 <Route path="/portal/:role/workspace" element={<StaffWorkspace />} />
                 <Route path="/portal/faculty/workspace" element={<FacultyPortal />} />
                 <Route path="/portal/faculty/workspace/:section" element={<FacultyPortal />} />
+                <Route path="/portal/administrative/workspace" element={<AdminPortal />} />
+                <Route path="/portal/administrative/workspace/:section" element={<AdminPortal />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 {/* Handle encoded URL - redirect /auth%3Ftab=login to /auth?tab=login */}
                 <Route path="/auth%3Ftab=login" element={<AuthRedirect tab="login" />} />
